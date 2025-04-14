@@ -1,0 +1,175 @@
+/* src/components/navbar.css */
+
+.custom-navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    padding-top: 20%;
+  }
+  
+  .navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  
+  .nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links li a:hover {
+    color: #007bff;
+  }
+  
+  .toggle-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 100;
+  }
+  
+  /* Show toggle button and hide nav links below 600px */
+  @media (max-width: 600px) {
+    .toggle-button {
+      display: block;
+    }
+
+    .nav-items {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      flex-direction: column;
+      gap: 20px;
+      min-width: 150px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+  
+    .nav-items.show {
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+    }
+  
+    .nav-item {
+      margin-left: 0;
+    }
+  }
+  
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.nav-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Default state for larger screens */
+.nav-items {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  font-family: 'Geist', sans-serif;
+  color: #000000;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 35px;
+}
+
+/* Toggle button styles */
+.toggle-button {
+  display: relative; /* Hidden by default on larger screens */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 100;
+  position: relative;
+  width: 24px;
+  height: 20px;
+}
+
+.hamburger {
+  width: 24px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: #0C3636;
+  transition: all 0.3s ease;
+  position: absolute;
+  left: 0;
+}
+
+/* Position the three lines in their initial state */
+.hamburger span:first-child {
+  top: 0;
+}
+
+.hamburger span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hamburger span:last-child {
+  bottom: 0;
+}
+
+/* Animation for open state */
+.hamburger.open span:first-child {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 10%;
+}
+
+.hamburger.open span:last-child {
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+  
