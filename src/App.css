@@ -1,38 +1,87 @@
-.App {
-  text-align: center;
+/* CSS Variables */
+:root {
+  --primary-color: #000000;
+  --secondary-color: #000000;
+  --accent-color: #BAF0E6;
+  --border-color: #3E898980;
+  --font-family: 'Geist', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Reset and Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* To prevent any horizontal scrolling */
+  font-family: var(--font-family);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* Main container styles */
+.container {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+}
+
+/* Background container */
+.main-box {
+  flex: 1;
+  background: url('/public/image1.jpg') center/cover no-repeat;
+  width: 100%;
+}
+
+.title-section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 25px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #000000;
+  margin: 0 66px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 15px;
+  padding: 25px;
+  color: #000000;
+  text-align: center;
+}
+
+.spotify-connect {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-bottom: 354px;
 }
 
-.App-link {
-  color: #61dafb;
+.spotify-button {
+  display: flex;
+  align-items: center;
+  background-color: var(--accent-color);
+  padding: 18px 43px;
+  border-radius: 50px;
+  border: 4px solid var(--border-color);
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.spotify-button:hover {
+  transform: scale(1.05);
+}
+
+.spotify-icon {
+  width: 36px;
+  height: 36px;
+  margin-right: 5px;
+}
+
+.spotify-text {
+  color: #000000;
+  font-size: 18px;
+  font-weight: bold;
 }
