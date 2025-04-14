@@ -1,12 +1,17 @@
 import './App.css';
 import React from 'react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1>hi</h1>
+    <div className="container">
+      <div className="main-box">
+        <Navbar />
+        <Hero />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
