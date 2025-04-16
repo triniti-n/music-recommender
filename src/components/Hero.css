@@ -3,8 +3,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 120vh;
-  min-height: 80vh;
+  height: 50vh;
+  min-height: 95vh;
   text-align: center;
   width: 100%;
 }
@@ -22,7 +22,7 @@
   font-style: bold;
   font-size: 35px;
   font-weight: bold;
-  color: #074F50;
+  color: white;
   margin: 0 66px;
   text-align: center;
   letter-spacing: 2px;
@@ -34,7 +34,7 @@
   font-size: 15px;
   font-weight: 400;
   padding: 10px;
-  color: #0B7173;
+  color: white;
   text-align: center;
   line-height: 1.4;
   max-width: 940px;
@@ -50,10 +50,9 @@
 .spotify-button {
   display: flex;
   align-items: center;
-  background-color: #BAF0E6;
+  background-color: #474747;
   padding: 12px 15px;
   border-radius: 10px;
-  border: 1px solid #3E898980;
 }
 
 .spotify-icon {
@@ -64,7 +63,7 @@
 
 .spotify-text {
   font-family: 'Geist', sans-serif;
-  color: #0C3636;
+  color: white;
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
