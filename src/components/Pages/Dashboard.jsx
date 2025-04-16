@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Dashboard.css';
 
 const Dashboard = () => {
+  const [inputs, setInputs] = useState(['', '', '', '', '']);
+
+  const handleInputChange = (index, value) => {
+    const newInputs = [...inputs];
+    newInputs[index] = value;
+    setInputs(newInputs);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle submission of songs/artists
+    console.log('Submitted songs/artists:', inputs);
+  };
+
   return (
     <div className="dashboard">
       <div className="dashboard-header">
@@ -23,10 +37,24 @@ const Dashboard = () => {
         </div>
         <div className="preferences-section">
           <h2>Preferences</h2>
-          <div className="genre-tags">
-            <span className="tag">Genre 1</span>
-            <span className="tag">Genre 2</span>
-            <span className="tag">Genre 3</span>
+          <div className="input-section">
+            <h3>Enter Your Favorite Songs or Artists</h3>
+            <form onSubmit={handleSubmit}>
+              {inputs.map((input, index) => (
+                <div key={index} className="input-group">
+                  <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => handleInputChange(index, e.target.value)}
+                    placeholder={`Song or Artist ${index + 1}`}
+                    className="music-input"
+                  />
+                </div>
+              ))}
+              <button type="submit" className="submit-button">
+                Get Recommendations
+              </button>
+            </form>
           </div>
         </div>
       </div>
