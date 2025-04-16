@@ -1,175 +1,169 @@
 /* src/components/navbar.css */
 
-.custom-navbar {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-    padding-top: 20%;
-  }
-  
-  .navbar-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-  
-  .nav-links li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-links li a:hover {
-    color: #007bff;
-  }
-  
-  .toggle-button {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 100;
-  }
-  
-  /* Show toggle button and hide nav links below 600px */
-  @media (max-width: 600px) {
-    .toggle-button {
-      display: block;
-    }
-
-    .nav-items {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(8px);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      flex-direction: column;
-      gap: 20px;
-      min-width: 150px;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-  
-    .nav-items.show {
-      display: flex;
-      opacity: 1;
-      visibility: visible;
-    }
-  
-    .nav-item {
-      margin-left: 0;
-    }
-  }
-  
-.navigation {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-top: 20px;
-  padding: 0 20px;
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(143, 186, 216, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  padding: 1rem 0;
 }
 
-.nav-container {
-  position: relative;
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-/* Default state for larger screens */
-.nav-items {
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-menu {
   display: flex;
   align-items: center;
+  gap: 2rem;
 }
 
 .nav-item {
-  font-family: 'Geist', sans-serif;
-  color: #000000;
-  font-size: 14px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
   font-weight: 500;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-left: 35px;
+  transition: opacity 0.2s ease;
 }
 
-/* Toggle button styles */
-.toggle-button {
-  display: relative; /* Hidden by default on larger screens */
-  background: none;
+.nav-item:hover {
+  opacity: 0.8;
+}
+
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 2rem;
+}
+
+.nav-button {
   border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  padding: 10px;
-  z-index: 100;
-  position: relative;
-  width: 24px;
-  height: 20px;
+  transition: all 0.2s ease;
+}
+
+.login-button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.login-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.signup-button {
+  background-color: white;
+  color: rgb(143, 186, 216);
+}
+
+.signup-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .hamburger {
-  width: 24px;
-  height: 20px;
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  width: 24px;
+  height: 24px;
 }
 
 .hamburger span {
   display: block;
+  width: 24px;
   height: 2px;
-  width: 100%;
-  background-color: #0C3636;
+  background-color: white;
   transition: all 0.3s ease;
   position: absolute;
   left: 0;
 }
 
-/* Position the three lines in their initial state */
 .hamburger span:first-child {
-  top: 0;
+  top: 6px;
 }
 
 .hamburger span:nth-child(2) {
-  top: 50%;
-  transform: translateY(-50%);
+  top: 14px;
 }
 
 .hamburger span:last-child {
-  bottom: 0;
+  top: 22px;
 }
 
-/* Animation for open state */
-.hamburger.open span:first-child {
-  top: 50%;
-  transform: translateY(-50%) rotate(45deg);
+.hamburger span.open:first-child {
+  transform: rotate(45deg);
+  top: 14px;
 }
 
-.hamburger.open span:nth-child(2) {
-  opacity: 10%;
+.hamburger span.open:nth-child(2) {
+  opacity: 0;
 }
 
-.hamburger.open span:last-child {
-  top: 50%;
-  transform: translateY(-50%) rotate(-45deg);
+.hamburger span.open:last-child {
+  transform: rotate(-45deg);
+  top: 14px;
 }
-  
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: rgba(143, 186, 216, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 6rem 2rem 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: right 0.3s ease;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-auth {
+    margin-left: 0;
+    margin-top: 2rem;
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-button {
+    width: 100%;
+    text-align: center;
+  }
+}
