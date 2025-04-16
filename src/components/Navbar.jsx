@@ -1,11 +1,12 @@
 // src/components/Navbar.js
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -15,10 +16,15 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  const navItems = [
+  const isOnDashboard = location.pathname === '/login';
+
+  // Different navigation items based on the current page
+  const navItems = isOnDashboard ? [
     { title: 'Home', path: '/' },
-    { title: 'Discover', path: '/discover' },
-    { title: 'Library', path: '/library' },
+    { title: 'Dashboard', path: '/login' },
+    { title: 'Library', path: '/library' }
+  ] : [
+    { title: 'Home', path: '/' }
   ];
 
   const handleNavigation = (path) => {
@@ -45,20 +51,22 @@ const Navbar = () => {
             </Link>
           ))}
           
-          <div className="nav-auth">
-            <button 
-              className="nav-button login-button" 
-              onClick={() => handleNavigation('/login')}
-            >
-              Log In
-            </button>
-            <button 
-              className="nav-button signup-button" 
-              onClick={() => handleNavigation('/signup')}
-            >
-              Sign Up
-            </button>
-          </div>
+          {!isOnDashboard && (
+            <div className="nav-auth">
+              <button 
+                className="nav-button login-button" 
+                onClick={() => handleNavigation('/login')}
+              >
+                Log In
+              </button>
+              <button 
+                className="nav-button signup-button" 
+                onClick={() => handleNavigation('/signup')}
+              >
+                Sign Up
+              </button>
+            </div>
+          )}
         </div>
 
         <button 
