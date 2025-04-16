@@ -1,6 +1,8 @@
 .dashboard {
   padding: 2rem;
-  margin-top: 80px;
+  margin-top: 65px;
+  min-height: 100vh;
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
 .dashboard-header {
@@ -9,7 +11,8 @@
 
 .dashboard-header h1 {
   font-size: 2rem;
-  color: #333;
+  color: #85ACDA;
+  filter: brightness(0.65);
 }
 
 .dashboard-content {
@@ -20,10 +23,67 @@
 
 .recommendations-section,
 .preferences-section {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.recommendations-section h2,
+.preferences-section h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.input-section {
+  margin-bottom: 2rem;
+}
+
+.input-section h3 {
+  color: #4B7AB3;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.music-input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.music-input:focus {
+  outline: none;
+  border-color: #85ACDA;
+  box-shadow: 0 0 0 2px rgba(133, 172, 218, 0.1);
+}
+
+.music-input::placeholder {
+  color: #aaa;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #85ACDA;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #4B7AB3;
+  transform: translateY(-1px);
 }
 
 .music-grid {
@@ -34,21 +94,17 @@
 }
 
 .music-card {
-  background: #f8f9fa;
+  background: #ffffff;
   border-radius: 8px;
   padding: 1rem;
   text-align: center;
   transition: transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .music-card:hover {
   transform: translateY(-5px);
-}
-
-.music-card img {
-  width: 100%;
-  border-radius: 6px;
-  margin-bottom: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .music-card h3 {
@@ -70,11 +126,16 @@
 }
 
 .tag {
-  background: #e9ecef;
+  background: #f0f0f0;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.9rem;
   color: #495057;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: #e0e0e0;
 }
 
 @media (max-width: 768px) {
