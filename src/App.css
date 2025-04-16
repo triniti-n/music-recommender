@@ -1,73 +1,143 @@
 /* CSS Variables */
 :root {
-  --primary-color: #000000;
-  --secondary-color: #000000;
-  --accent-color: #BAF0E6;
+  /* Text Colors */
+  --text-primary: #000000;
+  --text-secondary: #000000;
+  --text-accent: #074F50;
+  --text-light: #0B7173;
+  
+  /* Background Colors */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: rgba(255, 255, 255, 0.95);
+  --bg-button: gray;
+  
+  /* Accent Colors */
+  --accent-primary: #BAF0E6;
+  --accent-secondary: #3E898980;
+  
+  /* UI Elements */
   --border-color: #3E898980;
-  --font-family: 'Geist', sans-serif;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  
+  /* Typography */
+  --font-primary: 'Geist', sans-serif;
+  --font-heading: 'Days One', sans-serif;
+  
+  /* Spacing */
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 25px;
+  --spacing-xxl: 30px;
+  
+  /* Border Radius */
+  --border-radius-sm: 10px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 50px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
 }
 
 /* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* To prevent any horizontal scrolling */
-  font-family: var(--font-family);
+  overflow-x: hidden;
+  font-family: var(--font-primary);
+  line-height: 1.4;
 }
 
-/* Main container styles */
+/* Layout Components */
 .container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Background container */
 .main-box {
-  flex: 1;
-  background: url('/public/image1.jpg') center/cover no-repeat;
-  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/public/image1.jpg') center/cover no-repeat fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
 }
 
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: var(--spacing-lg) auto;
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  padding: var(--spacing-xxl);
+  min-height: calc(100vh - 40px);
+}
+
+/* Typography */
 .title-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 25px;
+  padding: 0 var(--spacing-xl);
   margin: 0 auto;
 }
 
 .title {
-  font-size: 30px;
+  font-family: var(--font-heading);
+  font-size: 35px;
   font-weight: bold;
-  color: #000000;
+  color: var(--text-accent);
   margin: 0 66px;
   text-align: center;
   letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .subtitle {
+  font-family: var(--font-primary);
   font-size: 15px;
-  padding: 25px;
-  color: #000000;
+  font-weight: 400;
+  padding: var(--spacing-sm);
+  color: var(--text-light);
   text-align: center;
+  line-height: 1.4;
+  max-width: 940px;
+  width: 100%;
 }
 
+/* Spotify Connect Button */
 .spotify-connect {
   display: flex;
   justify-content: center;
-  margin-bottom: 354px;
+  margin-top: var(--spacing-md);
 }
 
 .spotify-button {
   display: flex;
   align-items: center;
-  background-color: var(--accent-color);
-  padding: 18px 43px;
-  border-radius: 50px;
-  border: 4px solid var(--border-color);
+  background-color: var(--bg-button);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform var(--transition-fast);
 }
 
 .spotify-button:hover {
@@ -75,13 +145,39 @@ body {
 }
 
 .spotify-icon {
-  width: 36px;
-  height: 36px;
-  margin-right: 5px;
+  width: 24px;
+  height: 24px;
+  margin-right: var(--spacing-xs);
 }
 
 .spotify-text {
-  color: #000000;
-  font-size: 18px;
-  font-weight: bold;
+  font-family: var(--font-primary);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .title {
+    font-size: 28px;
+    margin: 0 20px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    padding: var(--spacing-xs);
+  }
+  
+  .content-wrapper {
+    padding: var(--spacing-lg);
+    margin: var(--spacing-sm);
+  }
+}
+
+
+
+
+
