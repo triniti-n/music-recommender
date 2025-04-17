@@ -1,4 +1,4 @@
-// src/components/Hero.js
+// src/components/utils/Hero/Hero.jsx
 import React from 'react';
 import './Hero.css';
 
@@ -14,7 +14,7 @@ const Hero = () => {
       <div className="spotify-connect">
         <div className="spotify-button">
           <img
-            src="/icons/spotify-icon.png"
+            src={require('../../../assets/icons/spotify-icon.png')}
             alt="Spotify icon"
             className="spotify-icon"
           />

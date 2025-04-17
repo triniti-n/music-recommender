@@ -57,25 +57,27 @@ body {
 }
 
 /* Layout Components */
+.app {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   width: 100vw;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .main-box {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('/public/image1.jpg') center/cover no-repeat fixed;
+  position: relative;
+  min-height: 100vh;
   width: 100vw;
-  height: 100vh;
-  z-index: -1;
+  z-index: 0;
+  background: url('/src/assets/images/image1.jpg') center/cover no-repeat;
 }
 
 .content-wrapper {
@@ -176,8 +178,3 @@ body {
     margin: var(--spacing-sm);
   }
 }
-
-
-
-
-

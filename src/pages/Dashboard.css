@@ -1,8 +1,10 @@
 .dashboard {
   padding: 2rem;
   margin-top: 65px;
-  min-height: 100vh;
+  /* Fill viewport below navbar and enable internal scrolling */
+  height: calc(100vh - 65px);
   background-color: rgba(255, 255, 255, 0.85);
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .dashboard-header {
@@ -11,8 +13,7 @@
 
 .dashboard-header h1 {
   font-size: 2rem;
-  color: #85ACDA;
-  filter: brightness(0.65);
+  color: #4B7AB3;
 }
 
 .dashboard-content {
@@ -146,4 +147,8 @@
   .dashboard {
     padding: 1rem;
   }
+}
+
+body {
+  overflow-y: auto; /* Ensure the body can scroll if needed */
 }

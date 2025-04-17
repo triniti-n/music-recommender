@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
+import MusicCard from '../components/utils/MusicCard/MusicCard';
 
 const Dashboard = () => {
   const [inputs, setInputs] = useState(['', '', '', '', '']);
@@ -25,14 +26,8 @@ const Dashboard = () => {
         <div className="recommendations-section">
           <h2>Recommendations</h2>
           <div className="music-grid">
-            <div className="music-card">
-              <h3>Track 1</h3>
-              <p>Artist 1</p>
-            </div>
-            <div className="music-card">
-              <h3>Track 2</h3>
-              <p>Artist 2</p>
-            </div>
+            <MusicCard title="Track 1" artist="Artist 1" />
+            <MusicCard title="Track 2" artist="Artist 2" />
           </div>
         </div>
         <div className="preferences-section">
