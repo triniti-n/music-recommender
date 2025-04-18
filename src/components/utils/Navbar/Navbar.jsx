@@ -1,11 +1,11 @@
 // src/components/Navbar.js
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
+import Logout from '../LogoutButton/Logout';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -28,11 +28,6 @@ const Navbar = () => {
     { title: 'Home', path: '/' }
   ];
 
-  const handleNavigation = (path) => {
-    closeMenu();
-    navigate(path);
-  };
-
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -40,7 +35,7 @@ const Navbar = () => {
           RecomMix
         </Link>
 
-        <div className={`nav-menu ${isOpen ? 'active' : ''}`}>
+        <div className={`nav-menu ${isOpen ? 'active' : ''}`}> 
           {navItems.map((item) => (
             <Link
               key={item.path}
@@ -51,7 +46,6 @@ const Navbar = () => {
               {item.title}
             </Link>
           ))}
-          
           {/* Only show login button if not on dashboard */}
           {!isOnDashboard && (
             <div className="nav-auth">
@@ -63,6 +57,7 @@ const Navbar = () => {
               </a>
             </div>
           )}
+          <Logout />
         </div>
 
         <button 
