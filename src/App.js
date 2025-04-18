@@ -2,8 +2,9 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/utils/Navbar/Navbar';
-import Hero from './components/utils/Hero/Hero';
-import Dashboard from './pages/Dashboard';
+import Hero from './pages/Home/Hero';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Callback from './pages/Callback';
 
 const App = () => {
   return (
@@ -14,7 +15,8 @@ const App = () => {
           <div className="main-box">
             <Routes>
               <Route path="/" element={<Hero />} />
-              <Route path="/login" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/callback" element={<Callback />} />
             </Routes>
           </div>
         </div>
