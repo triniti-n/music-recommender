@@ -40,3 +40,8 @@ def callback():
     session['expires_at'] = datetime.now() + timedelta(seconds=tokens.get('expires_in', 3600))
     # Redirect to frontend dashboard after successful auth
     return redirect("http://localhost:3000/dashboard")
+
+@auth_bp.route('/logout')
+def logout():
+    session.clear() # Clear all session data
+    return redirect("http://localhost:3000")
