@@ -1,13 +1,13 @@
-from flask import Flask, session, redirect, url_for, request
+from flask import Flask, redirect, url_for
+from flask_limiter import Limiter
 import os
-import requests
-from datetime import datetime, timedelta
+from datetime import timedelta
 from auth.routes import auth_bp
 from api.spotify import spotify_bp
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
-# Set session TTL (e.g., 1 hour)
+# Set session TTL
 app.permanent_session_lifetime = timedelta(hours=1)
 
 CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
@@ -44,6 +44,22 @@ def callback():
     # Handle the callback from Spotify
     return redirect("http://localhost:3000/dashboard")
 
+@app.after_request
+def after_request(response):
+    # Security headers
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    response.headers.add('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
+    response.headers['X-Frame-Options'] = 'DENY'
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    return response
+
+@app.route('/api/spotify/refresh-token', methods=['POST'])
+def refresh_token():
+    # Handle token refresh logic here
+    return "Token refreshed successfully", 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
