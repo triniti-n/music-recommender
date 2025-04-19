@@ -3,13 +3,17 @@ import './Logout.css';
 import { FiLogOut } from 'react-icons/fi';
 
 const Logout = () => {
+  const handleLogout = () => {
+    // Clear frontend session if needed (e.g., localStorage)
+    window.location.href = "http://localhost:5000/logout"; // Force full page reload
+  };
+
   return (
-    <a className="logout-button" href="http://localhost:5000/logout">
+    <button className="logout-button" onClick={handleLogout}>
       <FiLogOut className="logout-icon" /> 
       Logout
-    </a>
+    </button>
   );
 };
 
 export default Logout;
-
