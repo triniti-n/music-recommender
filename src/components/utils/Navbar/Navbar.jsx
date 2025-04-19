@@ -57,7 +57,8 @@ const Navbar = () => {
               </a>
             </div>
           )}
-          <Logout />
+          {/* Only show logout button on dashboard */}
+          {isOnDashboard && <Logout />}
         </div>
 
         <button 
