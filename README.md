@@ -18,6 +18,12 @@ Launches the test runner in the interactive watch mode.\
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+## Backend Setup
+
+1. Start venv: `source venv/bin/activate`
+2. Install dependencies: `pip install -r requirements.txt`
+3. Run server folder: `python3 -m app.main`
+
 ## Firebase Deployment
 
 1. Install Firebase CLI: `npm install -g firebase-tools`
@@ -25,5 +31,3 @@ It correctly bundles React in production mode and optimizes the build for the be
 3. Initialize Firebase: `firebase init`
 4. Deploy: `firebase deploy`
 5. End Deploment: `firebase hosting:disable`
-
-

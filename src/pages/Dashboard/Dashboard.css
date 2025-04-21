@@ -1,19 +1,22 @@
+/* --- Dashboard Layout --- */
 .dashboard {
   padding: 2rem;
   margin-top: 65px;
-  /* Fill viewport below navbar and enable internal scrolling */
   height: calc(100vh - 65px);
-  background-color: rgba(255, 255, 255, 0.85);
-  overflow-y: auto; /* Enable vertical scrolling */
+  background: linear-gradient(135deg, #f8fafc 0%, #e3ecfa 100%);
+  overflow-y: auto;
 }
 
 .dashboard-header {
   margin-bottom: 2rem;
+  text-align: left;
 }
 
 .dashboard-header h1 {
-  font-size: 2rem;
-  color: #4B7AB3;
+  font-size: 2.2rem;
+  color: #274472;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .dashboard-content {
@@ -24,16 +27,18 @@
 
 .recommendations-section,
 .preferences-section {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(133, 172, 218, 0.12);
 }
 
 .recommendations-section h2,
 .preferences-section h2 {
-  color: #333;
-  margin-bottom: 1rem;
+  color: #274472;
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 600;
 }
 
 .input-section {
@@ -44,10 +49,11 @@
   color: #4B7AB3;
   font-size: 1.1rem;
   margin-bottom: 1rem;
+  font-weight: 500;
 }
 
-.input-group {
-  margin-bottom: 1rem;
+.Search {
+  margin-bottom: 1.5rem;
 }
 
 .music-input {
@@ -55,8 +61,9 @@
   padding: 0.8rem;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
+  font-size: 1rem;
+  transition: all 0.2s;
+  background: #fafdff;
 }
 
 .music-input:focus {
@@ -78,7 +85,7 @@
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s, transform 0.2s;
   margin-top: 1rem;
 }
 
@@ -89,34 +96,35 @@
 
 .music-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.5rem;
   margin-top: 1rem;
 }
 
 .music-card {
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 1rem;
+  background: #fafdff;
+  border-radius: 12px;
+  padding: 1.2rem 1rem;
   text-align: center;
-  transition: transform 0.2s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(133, 172, 218, 0.08);
 }
 
 .music-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 4px 16px rgba(133, 172, 218, 0.15);
 }
 
 .music-card h3 {
   margin: 0.5rem 0;
   font-size: 1.1rem;
-  color: #333;
+  color: #274472;
+  font-weight: 600;
 }
 
 .music-card p {
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.97rem;
 }
 
 .genre-tags {
@@ -127,28 +135,128 @@
 }
 
 .tag {
-  background: #f0f0f0;
+  background: #e3ecfa;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  font-size: 0.9rem;
-  color: #495057;
-  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  color: #274472;
+  font-weight: 500;
+  transition: background 0.2s;
 }
 
 .tag:hover {
-  background: #e0e0e0;
+  background: #c5d8f6;
 }
 
-@media (max-width: 768px) {
+/* --- Ant Design Card and List Styling --- */
+
+.ant-card {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 12px rgba(133, 172, 218, 0.10) !important;
+  margin-bottom: 1.5rem;
+}
+
+.ant-list-item {
+  border-bottom: 1px solid #f0f0f0 !important;
+  padding: 1rem 0 !important;
+}
+
+.ant-list-item-meta-title p {
+  margin: 0;
+  color: #274472;
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+
+.ant-list-item-meta-description {
+  color: #7a7a7a;
+  font-size: 0.97rem;
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 900px) {
   .dashboard-content {
     grid-template-columns: 1fr;
   }
-  
+}
+
+@media (max-width: 600px) {
   .dashboard {
-    padding: 1rem;
+    padding: 0.5rem;
+  }
+
+  .recommendations-section,
+  .preferences-section {
+    padding: 1rem 0.5rem;
   }
 }
 
 body {
-  overflow-y: auto; /* Ensure the body can scroll if needed */
+  overflow-y: auto;
+  background: #f8fafc;
+}
+
+/* --- Miscellaneous (for legacy or unused classes) --- */
+
+.label-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.label-chip {
+  background: #e3ecfa;
+  color: #274472;
+  border-radius: 16px;
+  padding: 0.3rem 0.8rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.label-type {
+  font-size: 0.85em;
+  margin-left: 0.3em;
+  color: #7a7a7a;
+}
+
+.label-remove {
+  background: none;
+  border: none;
+  color: #274472;
+  margin-left: 0.5em;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  z-index: 10;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-top: 0.2rem;
+  width: 100%;
+  max-height: 220px;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(133, 172, 218, 0.10);
+  list-style: none;
+  padding: 0;
+}
+
+.suggestions-dropdown li {
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+}
+
+.suggestions-dropdown li:hover,
+.suggestions-dropdown li.active {
+  background: #e3ecfa;
+}
+
+.no-results {
+  color: #888;
+  padding: 0.7rem 1rem;
 }
