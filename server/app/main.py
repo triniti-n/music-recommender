@@ -14,7 +14,12 @@ def create_app():
     app.config.from_object(Config)
 
     # Initialize extensions
-    CORS(app)
+    CORS(app, resources={
+        r"/api/*": {
+            "origins": ["http://localhost:3000"],
+            "supports_credentials": True
+        }
+    })
     db.init_app(app)
 
     # Register blueprints

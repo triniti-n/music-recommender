@@ -1,6 +1,7 @@
-from flask import Blueprint, redirect, request, session, url_for
+from flask import Blueprint, redirect, request, session, url_for, jsonify
 import os, requests
 from urllib.parse import urlencode
+from datetime import datetime, timedelta
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -45,10 +46,46 @@ def callback():
     data = response.json()
     session['access_token'] = data['access_token']
     session['refresh_token'] = data.get('refresh_token')
+    
+    # Store token expiration time as naive datetime
+    expires_in = data.get('expires_in', 3600)
+    session['expires_at'] = datetime.now() + timedelta(seconds=expires_in)
+    
     return redirect("http://localhost:3000/dashboard")
 
 @auth_bp.route('/logout')
 def logout():
     session.pop('access_token', None)
     session.pop('refresh_token', None)
+    session.pop('expires_at', None)
     return redirect("http://localhost:3000/home")
+
+@auth_bp.route('/auth-status')
+def auth_status():
+    """Debug endpoint to check authentication status"""
+    access_token = session.get('access_token')
+    refresh_token = session.get('refresh_token')
+    expires_at = session.get('expires_at')
+    
+    # Handle datetime comparison safely
+    token_expired = False
+    if expires_at:
+        if isinstance(expires_at, str):
+            try:
+                expires_at = datetime.fromisoformat(expires_at.replace('Z', '+00:00'))
+            except ValueError:
+                pass
+        
+        if hasattr(expires_at, 'tzinfo') and expires_at.tzinfo is not None:
+            expires_at = expires_at.replace(tzinfo=None)
+        
+        token_expired = datetime.now() > expires_at
+    
+    status = {
+        'authenticated': bool(access_token),
+        'has_refresh_token': bool(refresh_token),
+        'token_expires_at': str(expires_at) if expires_at else None,
+        'token_expired': token_expired
+    }
+    
+    return jsonify(status)

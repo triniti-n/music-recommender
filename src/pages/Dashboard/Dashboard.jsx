@@ -16,13 +16,19 @@ class Dashboard extends Component {
     this.debounceTimeout = null;
   }
 
+  componentDidMount() {
+    // No authentication check needed for public search
+  }
+
   // Debounced search for better UX
   handleInputChange = (e) => {
     const value = e.target.value;
     this.setState({ searchValue: value });
     clearTimeout(this.debounceTimeout);
     this.debounceTimeout = setTimeout(() => {
-      this.getSearchResults(value);
+      if (value.trim()) {
+        this.getSearchResults(value);
+      }
     }, 400);
   };
 
@@ -44,8 +50,9 @@ class Dashboard extends Component {
     }));
   };
 
-  // Called on search button click
+  // Called on search button click or enter press
   handleSearch = (value) => {
+    if (!value) return;
     this.setState({ searchValue: value });
     this.getSearchResults(value, true); // force search and show no results if needed
   };
@@ -55,7 +62,15 @@ class Dashboard extends Component {
       this.setState({ searchResults: [], noResults: false });
       return;
     }
-    fetch(`/api/spotify/search?q=${encodeURIComponent(query)}&type=track,artist`)
+    
+    console.log('Searching for:', query); // Debug log
+    
+    fetch(`http://localhost:5000/api/search?q=${encodeURIComponent(query)}&type=track,artist`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => {
         if (!response.ok) {
           throw Error('Response Not Ok');
@@ -63,19 +78,25 @@ class Dashboard extends Component {
         return response.json();
       })
       .then(({ tracks, artists }) => {
+        console.log('Search response:', { tracks, artists }); // Debug log
+        
         const trackResults = (tracks?.items || []).map(track => ({
           ...track,
           type: 'track',
           display: track.name + ' - ' + track.artists.map(a => a.name).join(', '),
           avatar: track.album.images[0]?.url
         }));
+        
         const artistResults = (artists?.items || []).map(artist => ({
           ...artist,
           type: 'artist',
           display: artist.name,
           avatar: artist.images[0]?.url
         }));
+        
         const allResults = [...trackResults, ...artistResults];
+        console.log('Processed results:', allResults); // Debug log
+        
         this.setState({
           searchResults: allResults,
           noResults: forceShowNoResults && allResults.length === 0
@@ -140,7 +161,7 @@ class Dashboard extends Component {
                   size="large"
                   value={searchValue}
                   onChange={this.handleInputChange}
-                  onSearch={this.handleSearch}
+                  onSearch={(value) => this.handleSearch(value)}
                   allowClear
                 />
                 {/* Display selected tags */}
