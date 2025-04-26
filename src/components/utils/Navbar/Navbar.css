@@ -162,3 +162,20 @@
     text-align: center;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+  
+  .nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 65.5px;
+    right: 0;
+    background: rgba(143, 186, 216, 0.9);
+    padding: 2rem;
+  }
+}

@@ -18,7 +18,14 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    // No authentication check needed for public search
+    // Get search query from URL if it exists
+    const searchParams = new URLSearchParams(window.location.search);
+    const query = searchParams.get('q');
+    if (query) {
+      this.setState({ searchValue: query }, () => {
+        this.getSearchResults(query, true);
+      });
+    }
   }
 
   // Debounced search for better UX
@@ -66,6 +73,10 @@ class Dashboard extends Component {
   handleSearch = (value) => {
     if (!value) return;
     this.setState({ searchValue: value });
+    // Update URL with search query
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('q', value);
+    window.history.pushState({}, '', `${window.location.pathname}?${searchParams.toString()}`);
     this.getSearchResults(value, true); // force search and show no results if needed
   };
 

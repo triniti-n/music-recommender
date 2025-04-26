@@ -178,3 +178,15 @@ body {
     margin: var(--spacing-sm);
   }
 }
+
+/* This targets the search button in the Ant Design Input.Search component */
+.ant-input-search .ant-btn,
+.ant-input-search .ant-btn:hover,
+.ant-input-search .ant-btn:focus,
+.ant-input-search .ant-btn:active {
+  background: #274472 !important;
+  border: none !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  transform: none !important;
+}

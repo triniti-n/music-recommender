@@ -81,35 +81,17 @@
   font-size: 1rem;
   font-weight: 600;
   border-radius: 8px;
-  background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+  background: #274472;
   border: none;
-  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
-  transition: all 0.3s ease;
   margin: 0;
-}
-
-.selection-counter .create-playlist-button:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #274472 0%, #274472 100%);
-  box-shadow: 0 6px 16px rgba(39, 68, 114, 0.4);
-}
-
-.selection-counter .create-playlist-button:active {
-  transform: translateY(0);
 }
 
 /* Style for disabled button when too many selections */
 .create-playlist-container .ant-btn[disabled] {
   background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%);
   color: white;
-  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
   cursor: not-allowed;
   opacity: 0.8;
-}
-
-.create-playlist-container .ant-btn[disabled]:hover {
-  transform: none;
-  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
 }
 
 /* --- Custom Scrollbar Styling --- */
@@ -131,10 +113,6 @@
 .search-results-scroll::-webkit-scrollbar-thumb {
   background: #c5d8f6;
   border-radius: 10px;
-}
-
-.search-results-scroll::-webkit-scrollbar-thumb:hover {
-  background: #85ACDA;
 }
 
 /* --- Ant Design Card and List Styling --- */
@@ -194,8 +172,8 @@ body {
 .label-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  gap: 5rem;
+  margin-bottom: 2rem;
 }
 
 .label-chip {
@@ -243,11 +221,6 @@ body {
   cursor: pointer;
 }
 
-.suggestions-dropdown li:hover,
-.suggestions-dropdown li.active {
-  background: #e3ecfa;
-}
-
 .no-results {
   color: #888;
   padding: 0.7rem 1rem;
@@ -286,18 +259,6 @@ body {
   border-bottom: none;
 }
 
-.search-result-item:hover {
-  background: #f5f5f5;
-}
-
-.search-result-item img {
-  width: 48px;
-  height: 48px;
-  border-radius: 4px;
-  margin-right: 12px;
-  object-fit: cover;
-}
-
 .item-details {
   display: flex;
   flex-direction: column;
@@ -324,7 +285,7 @@ body {
   display: flex;
   align-items: center;
   background: #e6f7ff;
-  border: 1px solid #91d5ff;
+  border: 1px solid #274472;
   border-radius: 4px;
   padding: 4px 8px;
 }
@@ -340,10 +301,6 @@ body {
   cursor: pointer;
   font-size: 16px;
   padding: 0 4px;
-}
-
-.remove-tag:hover {
-  color: #ff4d4f;
 }
 
 .search-loading,
@@ -363,15 +320,11 @@ body {
 .search-error button {
   margin-top: 12px;
   padding: 8px 16px;
-  background: #ff4d4f;
+  background: #666;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-
-.search-error button:hover {
-  background: #ff7875;
 }
 
 .no-results {
@@ -390,8 +343,8 @@ body {
 
 /* Max selections message */
 .max-selections-message {
-  background-color: #fff2f0;
-  border: 1px solid #ffccc7;
+  background-color: #e8e8e8;
+  border: 1px solid #b2b2b2;
   border-radius: 8px;
   padding: 10px 15px;
   margin-bottom: 15px;
@@ -399,8 +352,52 @@ body {
 }
 
 .max-selections-message p {
-  color: #cf1322;
+  color: #666;
   margin: 0;
   font-size: 0.9rem;
   font-weight: 500;
+}
+
+.playlist-card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.seed-tag {
+  display: flex;
+  align-items: center;
+  background: #e6f7ff;
+  border: 1px solid #274472;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.selection-counter .create-playlist-button {
+  padding: 0 1.5rem;
+  height: 48px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background: #274472;
+  border: none;
+  margin: 0;
+}
+
+/* Add styles for the search button */
+.ant-input-search .ant-btn {
+  background: #274472;
+  border: none;
+}
+
+.ant-input-search .ant-btn:hover {
+  background: #274472;
+  transform: none;
 }
