@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, request, session, url_for, jsonify
+from flask import Blueprint, redirect, request, session, url_for, jsonify, make_response
 import os, requests
 from urllib.parse import urlencode
 from datetime import datetime, timedelta
@@ -51,14 +51,25 @@ def callback():
     expires_in = data.get('expires_in', 3600)
     session['expires_at'] = datetime.now() + timedelta(seconds=expires_in)
     
-    return redirect("http://localhost:3000/dashboard")
+    return redirect("http://localhost:3000/search")
 
-@auth_bp.route('/logout')
+@auth_bp.route('/logout', methods=['GET', 'POST'])
 def logout():
-    session.pop('access_token', None)
-    session.pop('refresh_token', None)
-    session.pop('expires_at', None)
-    return redirect("http://localhost:3000/home")
+    # Clear all session data
+    session.clear()
+    
+    # Create a response with redirect
+    response = make_response(redirect("http://localhost:3000/home"))
+    
+    # Set security headers
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    
+    # Clear any cookies
+    response.delete_cookie('session')
+    
+    return response
 
 @auth_bp.route('/auth-status')
 def auth_status():

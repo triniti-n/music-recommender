@@ -1,151 +1,138 @@
 /* --- Dashboard Layout --- */
 .dashboard {
-  padding: 2rem;
-  margin-top: 65px;
-  height: calc(100vh - 65px);
+  padding: 1rem;
+  margin-top: 60px;
+  height: calc(100vh - 40px);
   background: linear-gradient(135deg, #f8fafc 0%, #e3ecfa 100%);
   overflow-y: auto;
 }
 
 .dashboard-header {
-  margin-bottom: 2rem;
-  text-align: left;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .dashboard-header h1 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: #274472;
   font-weight: 700;
   letter-spacing: 1px;
+  margin: 0;
+  padding: 0.5rem 0;
 }
 
 .dashboard-content {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
+  display: flex;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 1rem;
 }
 
-.recommendations-section,
-.preferences-section {
+.search-section {
   background: #fff;
-  padding: 2rem 1.5rem;
+  padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(133, 172, 218, 0.12);
+  box-shadow: 0 4px 20px rgba(133, 172, 218, 0.15);
+  width: 100%;
 }
 
-.recommendations-section h2,
-.preferences-section h2 {
+.search-section h2 {
   color: #274472;
-  margin-bottom: 1.2rem;
-  font-size: 1.3rem;
+  margin-bottom: 1.25rem;
+  font-size: 1.25rem;
   font-weight: 600;
-}
-
-.input-section {
-  margin-bottom: 2rem;
-}
-
-.input-section h3 {
-  color: #4B7AB3;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  font-weight: 500;
-}
-
-.Search {
-  margin-bottom: 1.5rem;
-}
-
-.music-input {
-  width: 100%;
-  padding: 0.8rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: all 0.2s;
-  background: #fafdff;
-}
-
-.music-input:focus {
-  outline: none;
-  border-color: #85ACDA;
-  box-shadow: 0 0 0 2px rgba(133, 172, 218, 0.1);
-}
-
-.music-input::placeholder {
-  color: #aaa;
-}
-
-.submit-button {
-  width: 100%;
-  padding: 0.8rem;
-  background-color: #85ACDA;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-  margin-top: 1rem;
-}
-
-.submit-button:hover {
-  background-color: #4B7AB3;
-  transform: translateY(-1px);
-}
-
-.music-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-.music-card {
-  background: #fafdff;
-  border-radius: 12px;
-  padding: 1.2rem 1rem;
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(133, 172, 218, 0.08);
 }
 
-.music-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 4px 16px rgba(133, 172, 218, 0.15);
+.search-container {
+  width: 100%;
 }
 
-.music-card h3 {
-  margin: 0.5rem 0;
-  font-size: 1.1rem;
-  color: #274472;
-  font-weight: 600;
-}
-
-.music-card p {
-  color: #666;
-  font-size: 0.97rem;
-}
-
-.genre-tags {
+.selected-seeds-container {
+  min-height: 0.5rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  gap: 8px;
+  margin-bottom: 1rem;
 }
 
-.tag {
-  background: #e3ecfa;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.95rem;
+/* Selection counter styles */
+.selection-counter {
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 1rem;
   color: #274472;
   font-weight: 500;
-  transition: background 0.2s;
 }
 
-.tag:hover {
+.selection-counter p {
+  margin: 0;
+  background-color: #e3ecfa;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* Create playlist button within selection counter */
+.selection-counter .create-playlist-button {
+  padding: 0 1.5rem;
+  height: 48px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+  transition: all 0.3s ease;
+  margin: 0;
+}
+
+.selection-counter .create-playlist-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(29, 185, 84, 0.4);
+}
+
+.selection-counter .create-playlist-button:active {
+  transform: translateY(0);
+}
+
+/* Style for disabled button when too many selections */
+.create-playlist-container .ant-btn[disabled] {
+  background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.create-playlist-container .ant-btn[disabled]:hover {
+  transform: none;
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+}
+
+/* --- Custom Scrollbar Styling --- */
+.search-results-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.search-results-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.search-results-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.search-results-scroll::-webkit-scrollbar-thumb {
   background: #c5d8f6;
+  border-radius: 10px;
+}
+
+.search-results-scroll::-webkit-scrollbar-thumb:hover {
+  background: #85ACDA;
 }
 
 /* --- Ant Design Card and List Styling --- */
@@ -177,18 +164,21 @@
 
 @media (max-width: 900px) {
   .dashboard-content {
-    grid-template-columns: 1fr;
+    padding: 0 1rem;
   }
 }
 
 @media (max-width: 600px) {
   .dashboard {
-    padding: 0.5rem;
+    padding: 1rem;
   }
 
-  .recommendations-section,
-  .preferences-section {
-    padding: 1rem 0.5rem;
+  .search-section {
+    padding: 1.5rem;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 2rem;
   }
 }
 
@@ -259,12 +249,6 @@ body {
 .no-results {
   color: #888;
   padding: 0.7rem 1rem;
-}
-
-.search-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
 }
 
 .search-input-container {
@@ -394,5 +378,27 @@ body {
 
 .no-results p:first-child {
   margin-bottom: 8px;
+  font-weight: 500;
+}
+
+/* Remove the old create playlist container styles since we're not using them anymore */
+.create-playlist-container {
+  display: none;
+}
+
+/* Max selections message */
+.max-selections-message {
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.max-selections-message p {
+  color: #cf1322;
+  margin: 0;
+  font-size: 0.9rem;
   font-weight: 500;
 }

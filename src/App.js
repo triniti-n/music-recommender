@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/utils/Navbar/Navbar';
 import Hero from './pages/Home/Hero';
-import Dashboard from './pages/Dashboard/Dashboard';
+import SearchPage from './pages/Search/Search';
 import Callback from './pages/Callback';
 
 const App = () => (
@@ -15,7 +15,7 @@ const App = () => (
           <Routes>
             <Route path="/home" element={<Hero />} />
             <Route path="/" element={<Navigate to="/home" replace />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/search" element={<SearchPage />} />
             <Route path="/callback" element={<Callback />} />
           </Routes>
         </main>

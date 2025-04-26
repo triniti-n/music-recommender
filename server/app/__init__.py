@@ -10,26 +10,28 @@ db = SQLAlchemy()
 limiter = Limiter(key_func=lambda: "global")
 
 def create_app():
-    main = Flask(__name__)
+    app = Flask(__name__)
     
     # Load configuration
-    main.config.from_object('config.Config')
+    app.config.from_object('config.Config')
     
     # Initialize extensions
-    db.init_app(main)
-    CORS(main)
-    limiter.init_app(main)
+    db.init_app(app)
+    CORS(app)
+    limiter.init_app(app)
     
     # Register blueprints
     from app.auth import auth_bp
     from app.spotify import spotify_bp
     from app.recommend import recommend_bp
     from app.playlist import playlist_bp
+    from app.search import search_bp
     
     app.register_blueprint(auth_bp)
     app.register_blueprint(spotify_bp)
     app.register_blueprint(recommend_bp)
     app.register_blueprint(playlist_bp)
+    app.register_blueprint(search_bp)
     
     # Error handlers
     @app.errorhandler(404)

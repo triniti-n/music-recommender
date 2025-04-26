@@ -16,13 +16,13 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  // Show nav items and hide login button on /dashboard
-  const isOnDashboard = location.pathname === '/dashboard';
+  // Show nav items and hide login button on /search
+  const isOnSearch = location.pathname === '/search';
 
   // Different navigation items based on the current page
-  const navItems = isOnDashboard ? [
+  const navItems = isOnSearch ? [
     { title: 'Home', path: '/' },
-    { title: 'Dashboard', path: '/dashboard' },
+    { title: 'Search', path: '/search' },
     { title: 'Library', path: '/library' }
   ] : [
     { title: 'Home', path: '/' }
@@ -46,8 +46,8 @@ const Navbar = () => {
               {item.title}
             </Link>
           ))}
-          {/* Only show login button if not on dashboard */}
-          {!isOnDashboard && (
+          {/* Only show login button if not on search */}
+          {!isOnSearch && (
             <div className="nav-auth">
               <a 
                 className="nav-button login-button" 
@@ -57,8 +57,8 @@ const Navbar = () => {
               </a>
             </div>
           )}
-          {/* Only show logout button on dashboard */}
-          {isOnDashboard && <Logout />}
+          {/* Only show logout button on search */}
+          {isOnSearch && <Logout />}
         </div>
 
         <button 

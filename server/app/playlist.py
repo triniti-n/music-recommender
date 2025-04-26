@@ -37,22 +37,46 @@ def create_playlist():
         )
         r.raise_for_status()
         playlist = r.json()
+        playlist_id = playlist['id']
         
-        # Add tracks if provided
+        # Process tracks and artists
+        track_uris = []
+        
+        # Add direct track selections
         if data.get('tracks'):
-            playlist_id = playlist['id']
-            uris = [f"spotify:track:{track_id}" for track_id in data['tracks']]
-            
-            r = requests.post(
-                f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks",
-                headers=headers,
-                json={'uris': uris}
-            )
-            r.raise_for_status()
+            track_uris.extend([f"spotify:track:{track_id}" for track_id in data['tracks']])
+        
+        # Add tracks from selected artists
+        if data.get('artists'):
+            for artist_id in data['artists']:
+                # Get artist's top tracks
+                top_tracks_response = requests.get(
+                    f"https://api.spotify.com/v1/artists/{artist_id}/top-tracks?market=US",
+                    headers=headers
+                )
+                top_tracks_response.raise_for_status()
+                top_tracks = top_tracks_response.json().get('tracks', [])
+                
+                # Add up to 5 top tracks from each artist
+                for track in top_tracks[:5]:
+                    track_uris.append(track['uri'])
+        
+        # Add all tracks to the playlist
+        if track_uris:
+            # Spotify API has a limit of 100 tracks per request, so we need to batch
+            batch_size = 100
+            for i in range(0, len(track_uris), batch_size):
+                batch = track_uris[i:i+batch_size]
+                r = requests.post(
+                    f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks",
+                    headers=headers,
+                    json={'uris': batch}
+                )
+                r.raise_for_status()
         
         return jsonify(playlist)
     except requests.exceptions.RequestException as e:
-        return jsonify({'error': 'Failed to create playlist'}), 500
+        return jsonify({'error': 'Failed to create playlist', 'details': str(e)}), 500
 
 @playlist_bp.route('/api/playlists/<playlist_id>')
 def get_playlist(playlist_id):

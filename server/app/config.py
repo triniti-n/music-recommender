@@ -9,6 +9,12 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'your-secret-key')
     PERMANENT_SESSION_LIFETIME = timedelta(hours=1)
     
+    # Session Security
+    SESSION_COOKIE_SECURE = True  # Only send cookies over HTTPS
+    SESSION_COOKIE_HTTPONLY = True  # Prevent JavaScript access to cookies
+    SESSION_COOKIE_SAMESITE = 'Lax'  # Protect against CSRF
+    SESSION_REFRESH_EACH_REQUEST = True  # Refresh session on each request
+    
     # Database
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///music_recommender.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False

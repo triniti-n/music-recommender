@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.24.7",
     "babel-loader": "^10.0.0",
+    "cors": "^2.8.5",
     "firebase": "^11.6.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
