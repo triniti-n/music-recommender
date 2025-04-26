@@ -1,0 +1,116 @@
+.dashboard {
+  padding: 2rem;
+  margin-top: 60px;
+  height: calc(100vh - 60px);
+  background: linear-gradient(135deg, #f8fafc 0%, #e3ecfa 100%);
+  overflow-y: auto;
+}
+
+.dashboard-content {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.library-section {
+  width: 100%;
+}
+
+.library-title {
+  color: #274472;
+  margin-bottom: 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.playlist-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.playlist-card:hover {
+  transform: translateY(-5px);
+}
+
+.playlist-cover {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.empty-state-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.empty-state-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 3rem;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.empty-description {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 1rem 0;
+  display: block;
+}
+
+.ant-empty-image {
+  margin-bottom: 2rem;
+}
+
+.ant-btn-primary {
+  background: linear-gradient(135deg, #274472 0%, #274472 100%);
+  border: none;
+  height: 40px;
+  padding: 0 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.ant-btn-primary:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #1a2d4a 0%, #1a2d4a 100%);
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 1rem;
+  }
+
+  .library-section {
+    padding: 1rem;
+  }
+
+  .playlist-cover {
+    height: 150px;
+  }
+
+  .empty-state-card {
+    padding: 2rem;
+  }
+}

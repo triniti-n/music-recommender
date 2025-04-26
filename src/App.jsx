@@ -1,22 +1,31 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Hero from './pages/Hero/Hero';
+import Hero from './pages/Home/Hero';
 import SearchPage from './pages/SearchPage/SearchPage';
-import Callback from './pages/Callback/Callback';
+import Library from './pages/Library/Library';
+import Callback from './pages/Callback';
 import Navbar from './components/utils/Navbar/Navbar';
+import { AuthProvider } from './context/AuthContext';
 import './App.css';
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/callback" element={<Callback />} />
-        </Routes>
-      </div>
+      <AuthProvider>
+        <div className="app">
+          <div className="container">
+            <div className="main-box">
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Hero />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/callback" element={<Callback />} />
+                <Route path="/library" element={<Library />} />
+              </Routes>
+            </div>
+          </div>
+        </div>
+      </AuthProvider>
     </Router>
   );
 }
