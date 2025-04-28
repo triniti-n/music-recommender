@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify, request, session
 import requests
 import os
 from datetime import datetime, timedelta
-from .models import db, SearchHistory
 import base64
 
 search_bp = Blueprint('search', __name__)
