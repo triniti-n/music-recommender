@@ -1,10 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
 from flask_limiter import Limiter
 from datetime import datetime
 import os
-from .models import db
 
 def create_app():
     app = Flask(__name__)
@@ -20,7 +18,6 @@ def create_app():
             "supports_credentials": True
         }
     })
-    db.init_app(app)
 
     # Register blueprints
     from .spotify import spotify_bp
