@@ -41,7 +41,7 @@ class Dashboard extends Component {
   };
 
   // Add selected item to the tag list
-  handleSelectItem = (item) => {
+  async handleSelectItem(item) {
     const id = item.uri || item.id;
     
     // Check if item is already selected
@@ -55,11 +55,79 @@ class Dashboard extends Component {
       return;
     }
     
-    // Add the item to selections
-    this.setState(prevState => ({
-      selectedSeeds: [...prevState.selectedSeeds, item]
-    }));
+    try {
+      // Add the item to selections
+      this.setState(prevState => ({
+        selectedSeeds: [...prevState.selectedSeeds, item]
+      }));
+
+      // Get the current search query from state
+      const searchQuery = this.state.searchValue;
+
+      // Prepare the selection data with only necessary fields
+      const selectionData = {
+        id: item.id,
+        type: item.type,
+        display: item.display,
+        avatar: item.avatar,
+        uri: item.uri
+      };
+
+      // Send selection to server with search query
+      const response = await fetch('/api/selections', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'add',
+          selections: [selectionData],
+          searchQuery: searchQuery
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save selection');
+      }
+
+      message.success('Selection saved successfully');
+    } catch (error) {
+      message.error('Failed to save selection');
+      console.error('Error saving selection:', error);
+    }
   };
+
+  async handleCloseTag(item) {
+    const id = item.uri || item.id;
+    
+    try {
+      // Remove the item from selections
+      this.setState(prevState => ({
+        selectedSeeds: prevState.selectedSeeds.filter(i => (i.uri || i.id) !== id)
+      }));
+
+      // Send removal to server
+      const response = await fetch('/api/selections', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'remove',
+          selections: [item]
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to remove selection');
+      }
+
+      message.success('Selection removed successfully');
+    } catch (error) {
+      message.error('Failed to remove selection');
+      console.error('Error removing selection:', error);
+    }
+  }
 
   // Remove a tag
   handleCloseTag = (item) => {

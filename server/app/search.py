@@ -3,8 +3,45 @@ import requests
 import os
 from datetime import datetime, timedelta
 import base64
+import json
+import os
 
 search_bp = Blueprint('search', __name__)
+
+# Function to update selections JSON file
+def update_selections(action, selections, search_query):
+    selections_file = os.path.join(os.path.dirname(__file__), 'selections', 'all_selections.json')
+    try:
+        with open(selections_file, 'r') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        data = []
+    
+    if action == 'add':
+        # Clean up selection data to keep only necessary fields
+        cleaned_selections = []
+        for item in selections:
+            cleaned_item = {
+                'imageUrl': item.get('avatar', ''),  # Using avatar as it's the correct field from Spotify
+                'name': item.get('display', ''),  # Using display as it's the correct field from Spotify
+                'searchQuery': search_query,
+                'spotifyId': item.get('id', ''),  # Using id as it's the correct field from Spotify
+                'type': item.get('type', ''),
+                'selectedAt': datetime.utcnow().isoformat()
+            }
+            cleaned_selections.append(cleaned_item)
+        
+        # Add new selections
+        data.extend(cleaned_selections)
+    elif action == 'remove':
+        # Remove selections by ID
+        for item in selections:
+            data = [x for x in data if x.get('id') != item.get('id') and x.get('uri') != item.get('uri')]
+    
+    # Write back to file
+    with open(selections_file, 'w') as f:
+        json.dump(data, f, indent=2)
+    return True
 
 def save_search(query, search_type):
     session_id = session.get('session_id')
@@ -177,6 +214,30 @@ def search_artists():
     except requests.exceptions.RequestException as e:
         print('Spotify search error:', e)
         return jsonify({'error': 'Failed to search Spotify'}), 500
+
+@search_bp.route('/api/selections', methods=['POST'])
+def update_selections_endpoint():
+    try:
+        data = request.get_json()
+        action = data.get('action')
+        selections = data.get('selections', [])
+        search_query = data.get('searchQuery')
+        
+        if not action or action not in ['add', 'remove']:
+            return jsonify({'error': 'Invalid action'}), 400
+        if not selections:
+            return jsonify({'error': 'No selections provided'}), 400
+        if action == 'add' and not search_query:
+            return jsonify({'error': 'Search query is required for adding selections'}), 400
+            
+        success = update_selections(action, selections, search_query)
+        if success:
+            return jsonify({'message': f'Selections {action}ed successfully'}), 200
+        else:
+            return jsonify({'error': f'Failed to {action} selections'}), 500
+    except Exception as e:
+        print('Error in update_selections_endpoint:', str(e))
+        return jsonify({'error': str(e)}), 500
 
 @search_bp.route('/api/search', methods=['GET'])
 def public_search():
