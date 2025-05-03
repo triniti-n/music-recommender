@@ -74,6 +74,21 @@
   width: 9rem;
 }
 
+/* Button group for multiple buttons */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.selection-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 /* Create playlist button within selection counter */
 .selection-counter .create-playlist-button {
   padding: 0 1.5rem;
@@ -85,6 +100,8 @@
   border: none;
   margin: 0;
 }
+
+/* Play songs button styles removed as the button is no longer used */
 
 /* Style for disabled button when too many selections */
 .create-playlist-container .ant-btn[disabled] {
@@ -156,7 +173,7 @@
   .search-section {
     padding: 1.5rem;
   }
-  
+
   .dashboard-header h1 {
     font-size: 2rem;
   }
@@ -342,17 +359,17 @@ body {
 }
 
 /* Max selections message */
-.max-selections-message {
-  background-color: #e8e8e8;
-  border: 1px solid #b2b2b2;
+.search-results-info {
+  background-color: #e6f7ff;
+  border: 1px solid #91d5ff;
   border-radius: 8px;
   padding: 10px 15px;
   margin-bottom: 15px;
   text-align: center;
 }
 
-.max-selections-message p {
-  color: #666;
+.search-results-info p {
+  color: #274472;
   margin: 0;
   font-size: 0.9rem;
   font-weight: 500;

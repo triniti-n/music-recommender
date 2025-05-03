@@ -1,5 +1,5 @@
 import { db } from "../components/config/firebase";
-import { collection, addDoc, getDocs, query, where, orderBy } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, where, orderBy, serverTimestamp } from "firebase/firestore";
 
 // Add a new user selection
 export const addUserSelection = async (selection) => {
@@ -9,14 +9,14 @@ export const addUserSelection = async (selection) => {
 // Get all selections for a user and format them for playlist creation
 export const getUserSelectionsForPlaylist = async (userId) => {
   const q = query(
-    collection(db, "userSelections"), 
+    collection(db, "userSelections"),
     where("userId", "==", userId),
     orderBy("selectedAt", "desc")
   );
-  
+
   const querySnapshot = await getDocs(q);
   const selections = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  
+
   // Format the data for playlist creation
   const playlistData = {
     userId: userId,
@@ -32,7 +32,7 @@ export const getUserSelectionsForPlaylist = async (userId) => {
       type: 'artist'
     }))
   };
-  
+
   return playlistData;
 };
 
@@ -65,7 +65,7 @@ export const exportUserDataToJson = async (userId) => {
       where("userId", "==", userId),
       orderBy("selectedAt", "desc")
     );
-    
+
     const selectionsSnapshot = await getDocs(selectionsQuery);
     const selections = selectionsSnapshot.docs.map(doc => ({
       id: doc.id,
@@ -100,6 +100,39 @@ export const exportUserDataToJson = async (userId) => {
     return result;
   } catch (error) {
     console.error('Error exporting user data:', error);
+    throw error;
+  }
+};
+
+// Save playlist query to Firestore
+export const savePlaylistQuery = async (playlistData) => {
+  try {
+    // Format the data for Firestore
+    const playlistDoc = {
+      name: playlistData.name,
+      createdAt: serverTimestamp(),
+      songs: playlistData.songs.map(song => ({
+        id: song.id,
+        title: song.title,
+        artist: song.artist,
+        album: song.album || 'Unknown Album',
+        cover: song.cover,
+        searchQuery: song.searchQuery || ''
+      }))
+    };
+
+    // Add user ID if available
+    if (playlistData.userId) {
+      playlistDoc.userId = playlistData.userId;
+    }
+
+    // Save to Firestore
+    const docRef = await addDoc(collection(db, "playlists"), playlistDoc);
+    console.log("Playlist saved to Firestore with ID: ", docRef.id);
+
+    return docRef.id;
+  } catch (error) {
+    console.error("Error saving playlist to Firestore: ", error);
     throw error;
   }
 };

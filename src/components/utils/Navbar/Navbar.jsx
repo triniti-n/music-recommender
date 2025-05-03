@@ -16,14 +16,15 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  // Show nav items and hide login button on /search or /library
-  const isAuthenticatedPage = location.pathname === '/search' || location.pathname === '/library';
+  // Show nav items and hide login button on /search, /library, or /player
+  const isAuthenticatedPage = location.pathname === '/search' || location.pathname === '/library' || location.pathname === '/player';
 
   // Different navigation items based on the current page
   const navItems = isAuthenticatedPage ? [
     { title: 'Home', path: '/' },
     { title: 'Search', path: '/search' },
-    { title: 'Library', path: '/library' }
+    { title: 'Library', path: '/library' },
+    { title: 'Player', path: '/player' }
   ] : [
     { title: 'Home', path: '/' }
   ];
@@ -35,7 +36,7 @@ const Navbar = () => {
           RecomMix
         </Link>
 
-        <div className={`nav-menu ${isOpen ? 'active' : ''}`}> 
+        <div className={`nav-menu ${isOpen ? 'active' : ''}`}>
           {navItems.map((item) => (
             <Link
               key={item.path}
@@ -49,8 +50,8 @@ const Navbar = () => {
           {/* Only show login button if not on authenticated pages */}
           {!isAuthenticatedPage && (
             <div className="nav-auth">
-              <a 
-                className="nav-button login-button" 
+              <a
+                className="nav-button login-button"
                 href="http://localhost:5000/login"
               >
                 Log In
@@ -61,7 +62,7 @@ const Navbar = () => {
           {isAuthenticatedPage && <Logout />}
         </div>
 
-        <button 
+        <button
           className="hamburger"
           onClick={toggleMenu}
           aria-label="Toggle navigation menu"

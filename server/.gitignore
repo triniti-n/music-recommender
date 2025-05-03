@@ -36,6 +36,6 @@ ENV/
 # Logs
 *.log
 
-# Database
-music_recommender.db
-*.sqlite3
+# Cache
+cache/
+

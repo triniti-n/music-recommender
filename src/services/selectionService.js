@@ -1,14 +1,18 @@
 const API_BASE_URL = 'http://localhost:5000/api';
 
 export const addSelection = async (selectionData) => {
-  const response = await fetch(`${API_BASE_URL}/selections/add`, {
+  const response = await fetch(`${API_BASE_URL}/search/selections`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     },
     credentials: 'include',
-    body: JSON.stringify(selectionData)
+    body: JSON.stringify({
+      action: 'add',
+      selections: [selectionData],
+      searchQuery: selectionData.searchQuery
+    })
   });
 
   if (!response.ok) {
@@ -19,10 +23,18 @@ export const addSelection = async (selectionData) => {
   return response.json();
 };
 
-export const removeSelection = async (selectionId) => {
-  const response = await fetch(`${API_BASE_URL}/selections/${selectionId}`, {
-    method: 'DELETE',
-    credentials: 'include'
+export const removeSelection = async (selection) => {
+  const response = await fetch(`${API_BASE_URL}/search/selections`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      action: 'remove',
+      selections: [selection]
+    })
   });
 
   if (!response.ok) {
