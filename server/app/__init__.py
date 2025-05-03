@@ -1,13 +1,11 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_limiter import Limiter
-from flask_session import Session
 from datetime import timedelta
 import os
 
 # Initialize extensions
 limiter = Limiter(key_func=lambda: "global")
-sess = Session()
 
 def create_app():
     app = Flask(__name__)
@@ -23,7 +21,6 @@ def create_app():
     # Initialize extensions
     CORS(app)
     limiter.init_app(app)
-    sess.init_app(app)
 
     # Register blueprints
     from app.auth import auth_bp
