@@ -4,13 +4,16 @@ import { FiLogOut } from 'react-icons/fi';
 
 const Logout = () => {
   const handleLogout = () => {
-    // Clear frontend session if needed (e.g., localStorage)
-    window.location.href = "http://localhost:5000/logout"; // Force full page reload
+    // Clear any local storage items
+    localStorage.removeItem('spotify_access_token');
+
+    // Redirect to the root URL
+    window.location.href = "/";
   };
 
   return (
     <button className="logout-button" onClick={handleLogout}>
-      <FiLogOut className="logout-icon" /> 
+      <FiLogOut className="logout-icon" />
       Logout
     </button>
   );
