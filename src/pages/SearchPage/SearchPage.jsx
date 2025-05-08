@@ -223,8 +223,8 @@ class Dashboard extends Component {
       url: `https://open.spotify.com/track/${track.id}`
     }));
 
-    // Save the formatted songs to localStorage for the music player
-    localStorage.setItem('currentPlaylist', JSON.stringify({
+    // Save the formatted songs to sessionStorage (not localStorage) for the music player
+    sessionStorage.setItem('currentPlaylist', JSON.stringify({
       name: playlistName,
       songs: formattedSongs
     }));

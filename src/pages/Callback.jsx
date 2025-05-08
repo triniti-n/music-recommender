@@ -13,9 +13,9 @@ const Callback = () => {
     const error = params.get('error');
 
     if (accessToken) {
-      // Store token, redirect, etc.
-      localStorage.setItem('spotify_access_token', accessToken);
-      navigate('/dashboard'); // Redirect to dashboard or home
+      // Store token in sessionStorage (not localStorage) for non-permanent storage
+      sessionStorage.setItem('spotify_access_token', accessToken);
+      navigate('/search'); // Redirect to search page
     } else if (error) {
       // Handle error
       alert('Authentication failed: ' + error);

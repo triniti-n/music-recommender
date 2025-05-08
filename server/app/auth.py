@@ -68,11 +68,11 @@ def callback():
     # Create a response with redirect
     response = make_response(redirect("http://localhost:3000/search"))
 
-    # Set a cookie with the access token as a backup method
+    # Set a session cookie with the access token (no max_age means it's a session cookie)
     response.set_cookie(
         'spotify_access_token',
         data['access_token'],
-        max_age=expires_in,
+        # No max_age parameter means it's a session cookie that expires when browser closes
         httponly=True,
         samesite='Lax'
     )
@@ -84,16 +84,29 @@ def logout():
     # Clear all session data
     session.clear()
 
-    # Create a response with redirect
-    response = make_response(redirect("http://localhost:3000/home"))
+    # Create a response with redirect for GET requests or JSON response for POST
+    if request.method == 'GET':
+        response = make_response(redirect("http://localhost:3000/"))
+    else:
+        response = make_response(jsonify({"success": True, "message": "Logged out successfully"}))
 
     # Set security headers
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     response.headers['Pragma'] = 'no-cache'
     response.headers['Expires'] = '0'
 
-    # Clear any cookies
+    # Clear all cookies that might contain auth information
     response.delete_cookie('session')
+    response.delete_cookie('spotify_access_token')
+    response.delete_cookie('refresh_token')
+
+    # For cross-domain cookies, specify domain
+    frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:3000')
+    domain = frontend_url.split('//')[1].split(':')[0]
+    if domain != 'localhost':
+        response.delete_cookie('session', domain=domain)
+        response.delete_cookie('spotify_access_token', domain=domain)
+        response.delete_cookie('refresh_token', domain=domain)
 
     return response
 

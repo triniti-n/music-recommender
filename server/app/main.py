@@ -21,10 +21,10 @@ def create_app():
     # Configure logging
     logging.basicConfig(level=logging.INFO)
 
-    # Make sessions permanent by default
+    # Make sessions non-permanent by default (browser session only)
     @app.before_request
-    def make_session_permanent():
-        session.permanent = True
+    def make_session_non_permanent():
+        session.permanent = False
 
     # Initialize extensions
     CORS(app, resources={

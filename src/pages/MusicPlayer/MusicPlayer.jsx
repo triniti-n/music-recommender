@@ -63,11 +63,11 @@ const MusicPlayer = () => {
   const audioRef = useRef(null);
   const progressRef = useRef(null);
 
-  // Load songs from localStorage or fetch from API
+  // Load songs from sessionStorage or fetch from API
   useEffect(() => {
     const loadSongs = async () => {
-      // First try to load from localStorage
-      const savedPlaylist = localStorage.getItem('currentPlaylist');
+      // First try to load from sessionStorage
+      const savedPlaylist = sessionStorage.getItem('currentPlaylist');
       if (savedPlaylist) {
         try {
           const playlist = JSON.parse(savedPlaylist);
@@ -81,8 +81,8 @@ const MusicPlayer = () => {
               console.log('Loaded playlist with ID:', playlist.id);
             }
 
-            // Clear localStorage to avoid reloading the same playlist on refresh
-            localStorage.removeItem('currentPlaylist');
+            // Clear sessionStorage to avoid reloading the same playlist on refresh
+            sessionStorage.removeItem('currentPlaylist');
             return; // Exit if we successfully loaded from localStorage
           }
         } catch (error) {

@@ -11,7 +11,7 @@ class Config:
         print('Warning: Using default insecure SECRET_KEY. Set a secure key via environment variable.')
 
     # Session Configuration
-    PERMANENT_SESSION_LIFETIME = timedelta(hours=24)  # Extend session lifetime
+    PERMANENT_SESSION_LIFETIME = timedelta(hours=1)  # Short session lifetime
     SESSION_COOKIE_SECURE = False  # Set to False for local development; enable in production with HTTPS
     SESSION_COOKIE_HTTPONLY = True  # Prevent JavaScript access to cookies
     SESSION_COOKIE_SAMESITE = 'Lax'  # Protect against CSRF
@@ -20,7 +20,7 @@ class Config:
     # Note: SESSION_FILE_DIR is set in main.py to ensure directory exists
     SESSION_FILE_THRESHOLD = 500  # Limit number of session files
     SESSION_USE_SIGNER = True  # Sign the session cookie for security
-    SESSION_PERMANENT = True  # Make sessions permanent by default
+    SESSION_PERMANENT = False  # Make sessions non-permanent by default (browser session only)
 
     # Rate Limiting
     RATELIMIT_DEFAULT = "200 per day;50 per hour"
